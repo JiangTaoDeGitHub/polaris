@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.polaris.cloud</groupId>
+    <artifactId>polaris-cloud</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>polaris-common</module>
+        <module>polaris-oauth</module>
+        <module>polaris-gateway</module>
+        <module>polaris-plugin</module>
+        <module>polaris-service</module>
+        <module>polaris-service-api</module>
+    </modules>
+
+    <properties>
+        <!-- jdk版本1.8 -->
+        <java.version>1.8</java.version>
+        <!-- maven-compiler-plugin插件版本，Java代码编译 -->
+        <maven.plugin.version>3.8.1</maven.plugin.version>
+        <!-- maven编译时指定编码UTF-8 -->
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!-- 项目统一字符集编码UTF-8 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 项目统一字符集编码UTF-8 -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- polaris项目统一设置版本号 -->
+        <polaris.project.version>1.0-SNAPSHOT</polaris.project.version>
+        <!-- SpringBoot版本号 -->
+        <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
+        <!-- SpringCloud版本号 -->
+        <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
+        <!-- mysql数据库驱动 -->
+        <mysql.connector.version>8.0.17</mysql.connector.version>
+        <!-- postgresql数据库驱动 -->
+        <postgresql.connector.version>9.1-901.jdbc4</postgresql.connector.version>
+        <!-- 数据库连接池Druid -->
+        <druid.version>1.1.23</druid.version>
+        <!-- Mybatis Plus增强工具 -->
+        <mybatis.plus.version>3.4.0</mybatis.plus.version>
+        <!-- Knife4j Swagger2文档 -->
+        <knife4j.version>3.0.3</knife4j.version>
+    </properties>
+    <dependencies>
+        <!-- Lombok 通过简单注解消除冗长代码  -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!--dependencyManagement标签
+    ①对项目所依赖jar包进行版本管理的管理器。
+
+    ②使用pom.xml中的dependencyManagement元索能让所有在子模块中引用一个依赖而不用显式的列出版本号。也就是子模块不需要列出版本，子模块中的pom依赖会找到dependencyManagement所在jar包的版本，并引用这个jar对应的版本号。
+
+    ③让子模块不在受繁杂的版本影响，和父pom中的依赖一致即可
+    ①dependencyManagement埋只是声明依赖， 并不实现引入,因此子项目需要显示的声明需要用的依赖。
+
+    ②如果子项目中指定了版本号,那么会使用子项目中指定的jar版本
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring boot工程的依赖库,无需继承spring-boot-starter-parent -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring cloud工程的依赖库 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- mysql数据库驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
+            <!-- postgresql数据库驱动 -->
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.connector.version}</version>
+            </dependency>
+            <!-- 数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- Mybatis Plus增强工具 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <!-- 能够将Spring Boot应用打包为可执行的jar或war文件，然后以通常的方式运行Spring Boot应用 -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                    <configuration>
+                        <fork>true</fork>
+                        <finalName>${project.build.finalName}</finalName>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
