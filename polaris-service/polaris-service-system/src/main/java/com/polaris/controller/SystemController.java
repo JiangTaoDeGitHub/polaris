@@ -1,5 +1,6 @@
 package com.polaris.controller;
 
+import com.polaris.entity.Result;
 import com.polaris.service.ISystemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,4 +31,12 @@ public class SystemController {
     public Object page() {
         return systemService.page();
     }
+
+
+    @GetMapping(value = "exception")
+    @ApiOperation(value = "自定义异常及返回测试接口")
+    public Result<String> exception() {
+        return Result.data(systemService.exception());
+    }
+
 }

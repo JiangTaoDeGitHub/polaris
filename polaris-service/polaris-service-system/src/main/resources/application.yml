@@ -3,7 +3,10 @@ server:
 spring:
   application:
     name: polaris-service-system
-
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.20:8848
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver

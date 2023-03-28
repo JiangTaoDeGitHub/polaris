@@ -8,4 +8,6 @@ public interface ISystemService {
     List<Demo> list();
 
     Page<Demo> page();
+
+    String exception();
 }
