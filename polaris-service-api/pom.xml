@@ -14,4 +14,76 @@
         <module>polaris-service-base-api</module>
     </modules>
 
+    <properties>
+        <!-- polaris项目统一设置版本号 -->
+        <polaris.project.version>1.0-SNAPSHOT</polaris.project.version>
+
+    </properties>
+    <dependencies>
+        <!-- spring boot web核心包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- spring boot 健康监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- postgresql数据库驱动 -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+        <!-- 数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+
+        </dependency>
+        <!-- Mybatis Plus增强工具 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.polaris.cloud</groupId>
+            <artifactId>polaris-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- Nacos 服务注册发现-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- OpenFeign 微服务调用解决方案-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--不使用db jar包方式-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.polaris</groupId>-->
+        <!--            <artifactId>polaris-platform-db</artifactId>-->
+        <!--            <version>${polaris.project.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.polaris</groupId>-->
+        <!--            <artifactId>polaris-platform-mybatis</artifactId>-->
+        <!--            <version>${polaris.project.version}</version>-->
+        <!--        </dependency>-->
+    </dependencies>
+
 </project>

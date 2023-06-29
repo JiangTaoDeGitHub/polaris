@@ -7,9 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "system")
 @RestController
@@ -37,6 +35,13 @@ public class SystemController {
     @ApiOperation(value = "自定义异常及返回测试接口")
     public Result<String> exception() {
         return Result.data(systemService.exception());
+    }
+
+
+    @GetMapping(value = "api/by/id")
+    @ApiOperation(value = "Fegin Get调用测试接口")
+    public Result<Object> feginById(@RequestParam("id") String id) {
+        return Result.data("来了老弟"+id);
     }
 
 }
