@@ -10,4 +10,6 @@ public interface ISystemService {
     Page<Demo> page();
 
     String exception();
+
+    String feginById(String id);
 }

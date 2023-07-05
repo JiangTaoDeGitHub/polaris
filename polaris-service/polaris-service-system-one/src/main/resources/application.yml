@@ -1,25 +1,18 @@
 server:
-  port: 8001
+  port: 8101
+spring:
+  application:
+    name: polaris-service-system-one
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.20:8848
+#Sentinel端点配置
 management:
   endpoints:
     web:
       exposure:
         include: '*'
-spring:
-  application:
-    name: polaris-service-system
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.31.20:8848
-    sentinel:
-      filter:
-        enabled: true
-      transport:
-        port: 8719
-        #指定sentinel控制台的地址
-        dashboard: 192.168.31.20:8086
-      eager: true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver

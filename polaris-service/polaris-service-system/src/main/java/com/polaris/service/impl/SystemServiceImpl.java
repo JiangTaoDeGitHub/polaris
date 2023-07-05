@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,8 @@ import java.util.List;
 @Service
 public class SystemServiceImpl implements ISystemService {
 
+    @Value("${server.port}")
+    private String port;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private SystemTableMapper systemTableMapper;
@@ -43,5 +46,10 @@ public class SystemServiceImpl implements ISystemService {
         log.info("来了老弟");
         throw new BusinessException("自定义异常");
 //        return "成功获得数据";
+    }
+
+    @Override
+    public String feginById(String id) {
+        return "请求id" +id+"，服务端口"+ port;
     }
 }
