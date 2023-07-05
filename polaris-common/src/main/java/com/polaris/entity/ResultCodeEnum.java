@@ -94,7 +94,11 @@ public enum ResultCodeEnum {
     /**
      * 没有权限
      */
-    NO_PERMISSION(403, "当前用户无该接口权限");
+    NO_PERMISSION(403, "当前用户无该接口权限"),
+
+
+    SYSTEM_BUSY(429, "系统繁忙，请稍后再试");
+
 
     public int code;
 
