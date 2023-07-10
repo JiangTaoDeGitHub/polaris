@@ -53,4 +53,10 @@ public class SystemController {
     public Result<String> sentinelProtected() {
         return Result.data("访问的是限流测试接口");
     }
+
+    @ApiOperation(value = "限流测试")
+    @GetMapping(value = "sentinel/demo")
+    public Result<String> sentinelDemo() {
+        return Result.data("sentinel限流demo接口,设置阈值为1");
+    }
 }
