@@ -59,4 +59,10 @@ public class SystemController {
     public Result<String> sentinelDemo() {
         return Result.data("sentinel限流demo接口,设置阈值为1");
     }
+
+    @ApiOperation(value = "Gateway路由转发测试")
+    @GetMapping(value = "gateway/demo")
+    public Result gatewayForward() {
+        return Result.success("polaris-service-system转发请求成功");
+    }
 }

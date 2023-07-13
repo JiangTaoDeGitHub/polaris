@@ -19,8 +19,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfig {
 
-    @Bean(value = "systemApi")
-    public Docket systemApi() {
+    @Bean(value = "systemOneApi")
+    public Docket systemOneApi() {
         Docket docket=new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 //分组名称

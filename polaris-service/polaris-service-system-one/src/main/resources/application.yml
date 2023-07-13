@@ -1,5 +1,5 @@
 server:
-  port: 8101
+  port: 8003
 spring:
   application:
     name: polaris-service-system-one
@@ -7,12 +7,6 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.31.20:8848
-#Sentinel端点配置
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver

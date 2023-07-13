@@ -2,7 +2,7 @@ server:
   port: 80
 spring:
   application:
-    name: polaris-service-gateway
+    name: polaris-gateway
   cloud:
     nacos:
       discovery:
@@ -20,6 +20,14 @@ spring:
         - id: polaris-service-system
           uri: lb://polaris-service-system
           predicates:
-            - Path=/polaris-system/**
+            - Path=/polaris-service-system/**
           filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1
+        - id: polaris-service-system-one
+          uri: lb://polaris-service-system-one
+          predicates:
+            - Path=/polaris-service-system-one/**
+          filters:
+            - SwaggerHeaderFilter
             - StripPrefix=1

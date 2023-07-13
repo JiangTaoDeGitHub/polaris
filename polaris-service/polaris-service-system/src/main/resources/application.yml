@@ -12,6 +12,11 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.31.20:8848
+      config:
+        server-addr: 192.168.31.20:8848
+        file-extension: yml
+        group: DEFAULT_GROUP
+        enabled: true
     sentinel:
       filter:
         enabled: true
@@ -20,6 +25,15 @@ spring:
         #指定sentinel控制台的地址
         dashboard: 192.168.31.20:8086
       eager: true
+#      配置sentinel 读取nacos上的配置
+      datasource:
+        ds2:
+          nacos:
+            data-type: json # 默认提供两种内置的值，分别是 json 和 xml (不填默认是json)
+            server-addr: 192.168.31.20:8848
+            dataId: ${spring.application.name}-sentinel
+            groupId: DEFAULT_GROUP
+            rule-type: flow #rule-type 配置表示该数据源中的规则属于哪种类型的规则(flow流控，degrade熔断降级，authority，system系统保护, param-flow热点参数限流, gw-flow, gw-api-group)
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
