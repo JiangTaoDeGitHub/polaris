@@ -47,6 +47,8 @@
         <knife4j.version>3.0.3</knife4j.version>
         <!-- Knife4j Swagger2文档 -->
         <logbook.version>2.16.0</logbook.version>
+        <!-- redisson 版本 对应的springboot版本为2.3.4 -->
+        <redisson.version>3.14.0</redisson.version>
         <!-- Spring Cloud Alibaba -->
         <spring.cloud.alibaba>2.2.3.RELEASE</spring.cloud.alibaba>
         <!-- SpringCloud版本号 -->
@@ -129,6 +131,11 @@
                 <version>${spring.cloud.alibaba}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

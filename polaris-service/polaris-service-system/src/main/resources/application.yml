@@ -8,15 +8,39 @@ management:
 spring:
   application:
     name: polaris-service-system
+  redis:
+    database: 1
+    host: 192.168.31.20
+    port: 6379
+    password:
+    ssl: false
+    timeout: 2000
+  redisson:
+    config: |
+      singleServerConfig:
+        idleConnectionTimeout: 10000
+        connectTimeout: 10000
+        timeout: 3000
+        retryAttempts: 3
+        retryInterval: 1500
+        password: 
+        subscriptionsPerConnection: 5
+        clientName: null
+        address: "redis://192.168.31.20:6379"
+        subscriptionConnectionMinimumIdleSize: 1
+        subscriptionConnectionPoolSize: 50
+        connectionMinimumIdleSize: 32
+        connectionPoolSize: 64
+        database: 0
+        dnsMonitoringInterval: 5000
+      threads: 0
+      nettyThreads: 0
+      codec: !<org.redisson.codec.JsonJacksonCodec> {}
+      "transportMode":"NIO"
   cloud:
     nacos:
       discovery:
         server-addr: 192.168.31.20:8848
-      config:
-        server-addr: 192.168.31.20:8848
-        file-extension: yml
-        group: DEFAULT_GROUP
-        enabled: true
     sentinel:
       filter:
         enabled: true
@@ -25,7 +49,6 @@ spring:
         #指定sentinel控制台的地址
         dashboard: 192.168.31.20:8086
       eager: true
-#      配置sentinel 读取nacos上的配置
       datasource:
         ds2:
           nacos:
