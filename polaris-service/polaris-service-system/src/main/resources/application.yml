@@ -12,7 +12,7 @@ spring:
     database: 1
     host: 192.168.31.20
     port: 6379
-    password:
+    password: root
     ssl: false
     timeout: 2000
   redisson:
@@ -23,7 +23,7 @@ spring:
         timeout: 3000
         retryAttempts: 3
         retryInterval: 1500
-        password: 
+        password: root
         subscriptionsPerConnection: 5
         clientName: null
         address: "redis://192.168.31.20:6379"

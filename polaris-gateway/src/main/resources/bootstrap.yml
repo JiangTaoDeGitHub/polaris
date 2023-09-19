@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8081
 spring:
   application:
     name: polaris-gateway
@@ -7,15 +7,12 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.31.20:8848
-      config:
-        server-addr: 192.168.31.20:8848
-        file-extension: yml
-        group: DEFAULT_GROUP
-        enabled: true
+#      config:
+#        server-addr: 192.168.31.20:8848
+#        file-extension: yml
+#        group: DEFAULT_GROUP
+#        enabled: true
     gateway:
-      discovery:
-        locator:
-          enabled: true
       routes:
         - id: polaris-service-system
           uri: lb://polaris-service-system
@@ -31,3 +28,18 @@ spring:
           filters:
             - SwaggerHeaderFilter
             - StripPrefix=1
+        - id: polaris-oauth
+          uri: lb://polaris-oauth
+          predicates:
+            - Path=/polaris-oauth/oauth/token
+          filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.31.20:3306/polaris?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true
+    username: root
+    password: root@123
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
