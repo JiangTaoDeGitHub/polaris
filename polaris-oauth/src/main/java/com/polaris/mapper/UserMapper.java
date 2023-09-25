@@ -7,4 +7,8 @@ import org.springframework.stereotype.Component;
 public interface UserMapper {
 
     User selectByUserName(String username);
+
+
+    User getUserByMobile(String mobile);
+
 }

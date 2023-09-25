@@ -6,4 +6,8 @@
         select * from user where username = #{username}
     </select>
 
+    <select id="getUserByMobile" resultType="com.polaris.model.User">
+        select * from user where mobile = #{mobile}
+    </select>
+
 </mapper>

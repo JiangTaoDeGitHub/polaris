@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.TokenGranter;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -37,6 +38,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private DataSource dataSource;
+
+
+    @Autowired
+    private TokenGranter tokenGranter;
 
     /**
      * access_token存储器
@@ -86,9 +91,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenServices.setTokenEnhancer(jwtTokenEnhancer());
         tokenServices.setTokenStore(tokenStore());
         tokenServices.setSupportRefreshToken(true);
-        //设置token有效期，默认12小时，此处修改为6小时   21600
+        //设置token有效期，默认12小时，此处修改为60秒测试
         tokenServices.setAccessTokenValiditySeconds(60);
-        //设置refresh_token的有效期，默认30天，此处修改为7天
+        //设置refresh_token的有效期，此处修改为60秒测试
         tokenServices.setRefreshTokenValiditySeconds(60);
         return tokenServices;
     }
@@ -97,12 +102,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        //如果需要使用refresh_token模式则需要注入userDetailService
-        endpoints.authenticationManager(this.authenticationManager).
-        userDetailsService(userDetailService).
-        tokenStore(tokenStore()).
-        accessTokenConverter(jwtTokenEnhancer())
-                .tokenServices(tokenServices());
+//        //如果需要使用refresh_token模式则需要注入userDetailService
+//        endpoints.authenticationManager(this.authenticationManager).
+//        userDetailsService(userDetailService).
+//        tokenStore(tokenStore()).
+//        accessTokenConverter(jwtTokenEnhancer())
+//                .tokenServices(tokenServices()).;
+        endpoints.tokenGranter(tokenGranter);
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.polaris.config;
 
+import com.polaris.provider.SmsCodeAuthenticationProvider;
 import com.polaris.service.UserDetailServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,7 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     /**
      * 认证管理
      * @return 认证管理对象
@@ -47,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService())
                 .passwordEncoder(passwordEncoder());
-
+        auth.authenticationProvider(new SmsCodeAuthenticationProvider());
     }
 
     /**

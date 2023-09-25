@@ -11,7 +11,17 @@ public class User {
 
     private String role;
 
+    private String mobile;
+
     public User() {
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public int getId() {
