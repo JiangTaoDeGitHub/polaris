@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.polaris.mapper.PermissionMapper" >
+
+    <select id="listPermissionsByRoles" resultType="com.polaris.model.SysPermission">
+        SELECT pe.* FROM sys_permission pe  left join sys_role_permission rp on pe.ID = rp.PERMISSIONID LEFT JOIN sys_role ro on ro.ID = rp.ROLEID
+        where  ro.ID in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+
+    </select>
+
+</mapper>

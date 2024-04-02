@@ -1,8 +1,10 @@
 package com.polaris.model;
 
+import java.util.List;
+
 public class User {
 
-    private int id;
+    private String  id;
 
 
     private String password;
@@ -12,6 +14,11 @@ public class User {
     private String role;
 
     private String mobile;
+
+
+    private List<String> roles;
+
+    private List<String> permissions;
 
     public User() {
     }
@@ -24,11 +31,11 @@ public class User {
         this.mobile = mobile;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -54,5 +61,21 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 }

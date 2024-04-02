@@ -1,10 +1,12 @@
 package com.polaris.manager;
 
 import com.alibaba.nacos.common.utils.ConcurrentHashSet;
+import com.polaris.modle.AuthConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Slf4j
@@ -67,9 +70,15 @@ public class AccessManager implements ReactiveAuthorizationManager<Authorization
     //权限校验
     private boolean checkAuthorities(ServerWebExchange exchange, Authentication auth, String requestPath) {
         if (auth instanceof OAuth2Authentication) {
-            OAuth2Authentication athentication = (OAuth2Authentication) auth;
-            String clientId = athentication.getOAuth2Request().getClientId();
-            log.info("clientId is {}", clientId);
+//            OAuth2Authentication athentication = (OAuth2Authentication) auth;
+//            String clientId = athentication.getOAuth2Request().getClientId();
+//            log.info("clientId is {}", clientId);
+            Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+
+            return authorities.stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .filter(item -> !item.startsWith(AuthConstants.ROLE_PREFIX))
+                    .anyMatch(permission -> antPathMatcher.match(permission, requestPath));
         }
 
         Object principal = auth.getPrincipal();

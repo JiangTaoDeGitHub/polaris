@@ -3,11 +3,11 @@
 <mapper namespace="com.polaris.mapper.UserMapper" >
 
     <select id="selectByUserName" resultType="com.polaris.model.User">
-        select * from user where username = #{username}
+        select * from sys_user where username = #{username}
     </select>
 
     <select id="getUserByMobile" resultType="com.polaris.model.User">
-        select * from user where mobile = #{mobile}
+        select * from sys_user where mobile = #{mobile}
     </select>
 
 </mapper>
