@@ -22,7 +22,7 @@ public class TestController {
 
     @GetMapping(value = "api/by/id")
     @ApiOperation(value = "sysytemOne Fegin Get调用测试接口")
-    public Result<Object> feginById(@RequestParam("id") Long id) {
-        return Result.data(systemFeign.querySystemById(id));
+    public Result<String> feginById(@RequestParam("id") Long id) {
+        return systemFeign.querySystemById(id);
     }
 }

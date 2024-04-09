@@ -1,6 +1,7 @@
 package com.polaris.feign;
 
 import com.polaris.entity.Result;
+import com.polaris.feignFallback.SystemFeignFeignFallbackFactory;
 import com.polaris.model.ApiSystemDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "polaris-service-system")
+@FeignClient(name = "polaris-service-system",fallbackFactory = SystemFeignFeignFallbackFactory.class)
 public interface ISystemFeign {
     /**
      * OpenFeign测试Get
@@ -17,6 +18,6 @@ public interface ISystemFeign {
      * @return
      */
     @GetMapping("/system/api/by/id")
-    Result<Object> querySystemById(@RequestParam("id") Long id);
+    Result<String> querySystemById(@RequestParam("id") Long id);
 
 }
