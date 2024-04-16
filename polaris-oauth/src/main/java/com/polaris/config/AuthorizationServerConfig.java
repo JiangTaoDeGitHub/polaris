@@ -1,6 +1,7 @@
 package com.polaris.config;
 
 import com.polaris.service.UserDetailServiceImpl;
+import com.polaris.tokenConverter.CustomJwtTokenConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,7 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Bean
     public JwtAccessTokenConverter jwtTokenEnhancer(){
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        JwtAccessTokenConverter converter = new CustomJwtTokenConverter();
         // 设置对称签名
         converter.setSigningKey("polaris");
         return converter;
